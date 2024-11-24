@@ -15,16 +15,14 @@ app.get('/quote', async (req, res) => {
    }
 
    try {
-      // Get the current date and calculate the date 3 months ago
+   
       const endDate = new Date();
       const startDate = new Date();
-      startDate.setMonth(endDate.getMonth() - 3); // Subtract 3 months
+      startDate.setMonth(endDate.getMonth() - 3);
 
-      // Format dates as 'YYYY-MM-DD'
-      const period1 = startDate.toISOString().split('T')[0]; // Start date (3 months ago)
-      const period2 = endDate.toISOString().split('T')[0]; // End date (today)
+      const period1 = startDate.toISOString().split('T')[0];
+      const period2 = endDate.toISOString().split('T')[0];
 
-      // Fetch chart data for the given symbol within the last 3 months
       const chartData = await yf.chart(symbol, { period1, period2 });
 
       res.json(chartData);
