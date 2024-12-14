@@ -7,6 +7,8 @@ const PORT = 5000;
 
 app.use(cors());
 
+/* Chart API */
+
 app.get('/chart', async (req, res) => {
    const { symbol } = req.query;
    if (!symbol)
@@ -30,6 +32,8 @@ app.get('/chart', async (req, res) => {
    } catch (error) { res.status(500).json({ error: 'Failed to fetch stock data', message: error.message }) }
 });
 
+/* Quote API */
+
 app.get('/quote', async (req, res) => {
    const { symbol } = req.query;
    if (!symbol) 
@@ -44,6 +48,8 @@ app.get('/quote', async (req, res) => {
 
    } catch (error) { res.status(500).json({ error: 'Failed to fetch stock data', message: error.message }) }
 });
+
+/* Quote Summary API */
 
 app.get('/info', async (req, res) => {
    const { symbol } = req.query;
