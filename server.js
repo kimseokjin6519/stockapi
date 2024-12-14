@@ -45,6 +45,22 @@ app.get('/quote', async (req, res) => {
    } catch (error) { res.status(500).json({ error: 'Failed to fetch stock data', message: error.message }) }
 });
 
+app.get('/info', async (req, res) => {
+   const { symbol } = req.query;
+   if (!symbol) 
+      return res.status(400).json({ error: 'Symbol is required' });
+   try {
+
+      /* Fetch Info Data */
+      const allData = await yf.quoteSummary(symbol);
+
+      /* Return Financials Data for Symbol */ 
+      res.json(allData);
+
+   } catch (error) { res.status(500).json({ error: 'Failed to fetch stock data', message: error.message }) }
+});
+
+
 app.listen(PORT, () => {
    console.log(`Server running on http://localhost:${PORT}`);
 });
